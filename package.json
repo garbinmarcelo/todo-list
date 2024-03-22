@@ -1,0 +1,27 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "Projeto do curso de Front-end Avançado",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garbinmarcelo/todo-list.git"
+  },
+  "keywords": [
+    "todolist",
+    "todo",
+    "list"
+  ],
+  "author": "Marcelo Garbin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garbinmarcelo/todo-list/issues"
+  },
+  "homepage": "https://github.com/garbinmarcelo/todo-list#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}
