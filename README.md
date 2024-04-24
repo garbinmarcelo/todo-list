@@ -11,3 +11,7 @@ __Deverá conter obrigatoriamente__
 + [ ] Adicionar uma animação de Hover nas tasks para deixar o site mais interativo;
 + [ ] Incluir uma validação para que caso uma tarefa com o mesmo nome já exista na lista se tenha uma mensagem de erro e recusar a mesma;
 + [ ] Incluir um botão de modo escuro/claro para a página.
+
+__Requisitos para rodar a aplicação__
++ Node
++ NPM ou Yarn
