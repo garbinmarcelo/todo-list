@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Comparação de três números</title>
+    <title>Verificação de triângulo</title>
     <link rel="icon" type="image/x-icon" href="/assets/imgs/logo-js.webp" />
     <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
@@ -34,30 +34,44 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h4>Comparação de três números</h4>
-                                <p>Escreva um programa que solicite ao usuário três números e determine o maior entre eles. Exiba o número maior.</p>
+                                <h4>Verificação de triângulo</h4>
+                                <p class="mb-1">Escreva um programa que solicite ao usuário três valores representando os lados de um triângulo e determine se esses valores podem formar um triângulo válido.</p>
+                                <p class="mb-1">Se sim, classifique o triângulo como equilátero, isósceles ou escaleno, dependendo da igualdade dos lados.</p>
+                                <p class="mb-1">A primeira etapa é entender as condições necessárias para que três valores possam formar um triângulo válido. De acordo com a desigualdade triangular, a soma de dois lados quaisquer de um triângulo deve ser sempre maior que o terceiro lado. Ou seja, se a, b e c são os lados do triângulo, então:</p>
+                                <ul>
+                                    <li>a + b > c</li>
+                                    <li>b + c > a</li>
+                                    <li>a + c > b</li>
+                                </ul>
+                                <p class="mb-1">Após verificar se os valores formam um triângulo válido, podemos determinar o tipo de triângulo com base no comprimento dos lados:</p>
+                                <ul>
+                                    <li>Triângulo equilátero: Todos os três lados são iguais.</li>
+                                    <li>Triângulo isósceles: Dois lados são iguais.</li>
+                                    <li>Triângulo escaleno: Todos os três lados são diferentes.</li>
+                                    <li>Triângulo inválido: Um dos lados é maior ou igual à soma dos outros dois lados ou A soma de dois lados é igual ao terceiro lado.</li>
+                                </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <form>
-                                    <div id="mostrarMaiorNumero" class="mb-3 d-none">
+                                    <div id="mostrarResultado" class="mb-3 d-none">
                                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            O maior número é: <strong id="maiorNumero"></strong>
+                                            O tipo do triângulo é: <strong id="tipoTriangulo"></strong>
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="primeiroNumero" class="form-label">Primeiro Número*</label>
-                                        <input name="primeiroNumero" type="number" placeholder="Primeiro Número" class="form-control" id="primeiroNumero" required />
+                                        <label for="primeiroNumero" class="form-label">Lado A*</label>
+                                        <input name="primeiroNumero" type="number" placeholder="Lado A" class="form-control" id="primeiroNumero" required />
                                     </div>
                                     <div class="mb-3">
-                                        <label for="segundoNumero" class="form-label">Segundo Número*</label>
-                                        <input name="segundoNumero" type="number" placeholder="Segundo Número" class="form-control" id="segundoNumero" required />
+                                        <label for="segundoNumero" class="form-label">Lado B*</label>
+                                        <input name="segundoNumero" type="number" placeholder="Lado B" class="form-control" id="segundoNumero" required />
                                     </div>
                                     <div class="mb-3">
-                                        <label for="terceiroNumero" class="form-label">Terceiro Número*</label>
-                                        <input name="terceiroNumero" type="number" placeholder="Terceiro Número" class="form-control" id="terceiroNumero" required />
+                                        <label for="terceiroNumero" class="form-label">Lado C*</label>
+                                        <input name="terceiroNumero" type="number" placeholder="Lado C" class="form-control" id="terceiroNumero" required />
                                     </div>
                                     <button name="reset" type="button" class="btn btn-secondary" >Limpar</button>
                                     <button name="verificar" type="button" class="btn btn-primary">Verificar</button>
@@ -82,39 +96,41 @@
         let numero1 = parseFloat(document.getElementById('primeiroNumero').value);
         let numero2 = parseFloat(document.getElementById('segundoNumero').value);
         let numero3 = parseFloat(document.getElementById('terceiroNumero').value);
-        let maior = 0;
+        let tipoTriangulo = '';
 
         if (isNaN(numero1) || isNaN(numero2) || isNaN(numero3)) {
           alert('Por favor, preencha todos os campos com números válidos.');
           return;
         }
 
-        maior = verificarMaiorNumero(numero1, numero2, numero3);
-        document.getElementById('maiorNumero').innerText = maior;
-        document.getElementById('mostrarMaiorNumero').classList.remove('d-none');
+        tipoTriangulo = classificarTriangulo(numero1, numero2, numero3);
+        document.getElementById('tipoTriangulo').innerText = tipoTriangulo;
+        document.getElementById('mostrarResultado').classList.remove('d-none');
       });
 
       document.querySelector('button[name="reset"]').addEventListener('click', function() {
         resetform();
       });
 
-      function verificarMaiorNumero(numero1, numero2, numero3) {
-        if (numero1 > numero2 && numero1 > numero3) {
-          maior = numero1;
-        } else if (numero2 > numero3) {
-          maior = numero2;
-        } else {
-          maior = numero3;
+      function classificarTriangulo(a, b, c) {
+        if (a + b > c && b + c > a && a + c > b) {
+          if (a === b && b === c) {
+            return 'Equilátero';
+          } else if (a === b || b === c || a === c) {
+            return 'Isósceles';
+          } else {
+            return 'Escaleno';
+          }
         }
 
-        return maior;
+        return 'Não é um triângulo válido';
       }
 
       function resetform() {
         document.getElementById('primeiroNumero').value = '';
         document.getElementById('segundoNumero').value = '';
         document.getElementById('terceiroNumero').value = '';
-        document.getElementById('mostrarMaiorNumero').classList.add('d-none');
+        document.getElementById('mostrarResultado').classList.add('d-none');
       }
     </script>
 </body>
