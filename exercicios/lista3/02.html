@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Crie um controlador (Controller) para o modelo</title>
+    <link rel="icon" type="image/x-icon" href="/assets/imgs/logo-js.webp" />
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background: url('/assets/imgs/vladstudio-library-wallpaper.webp') no-repeat; background-size: cover;">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row">
+            <div id="navbar" class="col-4"></div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>Crie um controlador (Controller) para o modelo</h4>
+                                <p class="mb-1">Desenvolva um controlador que manipule a lógica de negócios para interagir com o modelo.</p>
+                                <p class="mb-1">Por exemplo, você pode criar métodos para adicionar um novo usuário, atualizar informações existentes ou excluir usuários.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div id="alert"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button name="submit" type="button" class="btn btn-primary">Clique aqui</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+      document.querySelector('button[name="submit"]').addEventListener('click', function() {
+         let model = new Usuario();
+         let usuarioController = new UsuarioController(model);
+
+        usuarioController.adicionarUsuario('Marcelo', 'marcelo@garbin.dev', 35);
+        usuarioController.adicionarUsuario('Luca', 'luca@garbin.dev', 1);
+
+        bsAlert(usuarioController.exibirUsuarios());
+      });
+
+      // Modelo
+      class Usuario {
+        constructor(nome, email, idade) {
+          this.nome = nome;
+          this.email = email;
+          this.idade = idade;
+        }
+
+      }
+
+      // Controlador
+      class UsuarioController {
+        constructor(model) {
+          this.model = model;
+        }
+
+        adicionarUsuario(nome, email, idade) {
+          const usuario = new Usuario(nome, email, idade);
+          //this.model.addItem(usuario);
+        }
+
+        atualizarUsuario(usuario, index) {
+          this.model[index] = usuario;
+        }
+
+        excluirUsuario(index) {
+          this.model.splice(index, 1);
+        }
+
+        exibirUsuarios() {
+          console.log(this.model);
+          return this.model;
+        }
+      }
+    </script>
+</body>
+</html>

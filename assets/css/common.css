@@ -1,0 +1,15 @@
+.list-group-item:hover {
+  background-color: #EDFFC4;
+  font-weight: bold;
+}
+
+body,
+.light-mode {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}

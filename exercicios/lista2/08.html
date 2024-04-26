@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Retorno de Investimento</title>
+    <link rel="icon" type="image/x-icon" href="/assets/imgs/logo-js.webp" />
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background: url('/assets/imgs/vladstudio-library-wallpaper.webp') no-repeat; background-size: cover;">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row">
+            <div id="navbar" class="col-4"></div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>Retorno de Investimento</h4>
+                                <p class="mb-1">Crie uma função que informe o retorno de um investimento (montante) com base nos valores do capital inicial, tempo em meses e taxa de juros mensal fornecidos pelo usuário.</p>
+                                <p class="mb-1">Use a fórmula: (M = C \cdot (1 + i)^t), onde:</p>
+                                <ul>
+                                    <li>(C) é o capital inicial investido.</li>
+                                    <li>(i) é a taxa de juros (em percentual).</li>
+                                    <li>(t) é o tempo do investimento (em meses). Exiba o resultado com duas casas decimais.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div id="alert"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form>
+                                    <div id="mostrarResultado" class="mb-3 d-none">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong id="resultado"></strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numero1" class="form-label">Capital Inicial*</label>
+                                        <input name="numero1" type="number" min="0" placeholder="Capital Inicial" class="form-control" id="numero1" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numero2" class="form-label">Tempo (meses)*</label>
+                                        <input name="numero2" type="number" min="1" max="12" placeholder="Tempo (meses)" class="form-control" id="numero2" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numero3" class="form-label">Taxa de Juros (mensal)*</label>
+                                        <input name="numero3" type="number" min="1" placeholder="Taxa de Juros (mensal)" class="form-control" id="numero3" required />
+                                    </div>
+                                    <button name="limpar" type="reset" class="btn btn-secondary">Limpar</button>
+                                    <button name="submit" type="button" class="btn btn-primary">Verificar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+      document.querySelector('button[name="submit"]').addEventListener('click', function() {
+        let capitalInicial = parseFloat(document.getElementById('numero1').value);
+        let tempoMeses = parseFloat(document.getElementById('numero2').value);
+        let taxaJuros = parseFloat(document.getElementById('numero3').value);
+
+        if (isNaN(capitalInicial) || isNaN(tempoMeses) || isNaN(taxaJuros) || capitalInicial <= 0 || tempoMeses <= 0 || taxaJuros <= 0) {
+          bsAlert('Por favor, preenchas os campos com números válidos.', 'danger');
+          return;
+        }
+
+        calcularInvestimento(capitalInicial, tempoMeses, taxaJuros);
+      });
+
+      function calcularInvestimento(capitalInicial, tempoMeses, taxaJuros) {
+        let taxaJurosDecimal = taxaJuros / 100;
+        let montante = capitalInicial * Math.pow(1 + taxaJurosDecimal, tempoMeses);
+        montante = Math.round(montante * 100) / 100;
+
+        bsAlert(`Capital inicial <strong>${capitalInicial}</strong> | Tempo (meses) <strong>${tempoMeses}</strong> | Taxa de juros (mensal) <strong>${taxaJuros}%</strong> | O valor de retorno é: <strong>${montante.toFixed(2)}</strong>`);
+      }
+    </script>
+</body>
+</html>

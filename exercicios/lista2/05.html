@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Comparação de três números</title>
+    <title>Área e Perímetro de um Círculo</title>
     <link rel="icon" type="image/x-icon" href="/assets/imgs/logo-js.webp" />
     <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
@@ -16,8 +16,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h4>Comparação de três números</h4>
-                                <p>Escreva um programa que solicite ao usuário três números e determine o maior entre eles. Exiba o número maior.</p>
+                                <h4>Área e Perímetro de um Círculo</h4>
+                                <p class="mb-1">Crie uma função que encontre a área e o perímetro de um círculo, com base no raio fornecido.</p>
                             </div>
                         </div>
                         <div class="row">
@@ -28,17 +28,15 @@
                         <div class="row">
                             <div class="col">
                                 <form>
-                                    <div class="mb-3">
-                                        <label for="primeiroNumero" class="form-label">Primeiro Número*</label>
-                                        <input name="primeiroNumero" type="number" placeholder="Primeiro Número" class="form-control" id="primeiroNumero" required />
+                                    <div id="mostrarResultado" class="mb-3 d-none">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong id="resultado"></strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="segundoNumero" class="form-label">Segundo Número*</label>
-                                        <input name="segundoNumero" type="number" placeholder="Segundo Número" class="form-control" id="segundoNumero" required />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="terceiroNumero" class="form-label">Terceiro Número*</label>
-                                        <input name="terceiroNumero" type="number" placeholder="Terceiro Número" class="form-control" id="terceiroNumero" required />
+                                        <label for="numero1" class="form-label">Raio*</label>
+                                        <input name="numero1" type="number" min="0" placeholder="Raio" class="form-control" id="numero1" required />
                                     </div>
                                     <button name="limpar" type="reset" class="btn btn-secondary">Limpar</button>
                                     <button name="submit" type="button" class="btn btn-primary">Verificar</button>
@@ -55,28 +53,21 @@
     <script src="../js/common.js"></script>
     <script>
       document.querySelector('button[name="submit"]').addEventListener('click', function() {
-        let numero1 = parseFloat(document.getElementById('primeiroNumero').value);
-        let numero2 = parseFloat(document.getElementById('segundoNumero').value);
-        let numero3 = parseFloat(document.getElementById('terceiroNumero').value);
-        let maior = 0;
+        let raio = parseFloat(document.getElementById('numero1').value);
 
-        if (isNaN(numero1) || isNaN(numero2) || isNaN(numero3)) {
-          bsAlert('Por favor, preencha todos os campos com números válidos.', 'danger');
+        if (isNaN(raio) || raio <= 0) {
+          bsAlert('Por favor, preencha o campo com número válido.', 'danger');
           return;
         }
 
-        maior = verificarMaiorNumero(numero1, numero2, numero3);
-        bsAlert(`O maior número é: <strong>${maior}</strong>`);
+        areaPerimetroCirculo(raio);
       });
 
-      function verificarMaiorNumero(numero1, numero2, numero3) {
-        if (numero1 > numero2 && numero1 > numero3) {
-          return numero1;
-        } else if (numero2 > numero3) {
-          return numero2;
-        }
+      function areaPerimetroCirculo(raio) {
+        let area = Math.PI * raio * raio;
+        let perimetro = 2 * Math.PI * raio;
 
-        return numero3;
+        bsAlert(`A área do círculo com raio <strong>${raio}</strong> é: <strong>${area.toFixed(2)}</strong> e o perímetro é: <strong>${perimetro.toFixed(2)}</strong>`);
       }
     </script>
 </body>

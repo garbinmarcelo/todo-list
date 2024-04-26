@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Crie um modelo (Model) simples</title>
+    <link rel="icon" type="image/x-icon" href="/assets/imgs/logo-js.webp" />
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background: url('/assets/imgs/vladstudio-library-wallpaper.webp') no-repeat; background-size: cover;">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row">
+            <div id="navbar" class="col-4"></div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>Crie um modelo (Model) simples</h4>
+                                <p>Crie uma classe JavaScript que represente um modelo de dados básico, como um objeto de usuário com propriedades como nome, email e idade.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div id="alert"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button name="submit" type="button" class="btn btn-primary">Clique aqui</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+      document.querySelector('button[name="submit"]').addEventListener('click', function() {
+         let usuario = new Usuario('Marcelo', 'marcelo@garbin.dev', 35);
+         bsAlert(usuario.exibirInfo());
+      });
+
+      class Usuario {
+        constructor(nome, email, idade) {
+          this.nome = nome;
+          this.email = email;
+          this.idade = idade;
+        }
+
+        exibirInfo() {
+          return `Nome: ${this.nome} | Email: ${this.email} | Idade: ${this.idade}`;
+        }
+      }
+    </script>
+</body>
+</html>

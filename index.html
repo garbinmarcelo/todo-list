@@ -3,11 +3,146 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Todo-list</title>
+    <title>Lista de Tarefas</title>
+    <link rel="icon" type="image/x-icon" href="/assets/imgs/logo-js.webp" />
     <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./assets/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="./assets/css/common.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Hello, world Bootstrap 5!</h1>
-    <script href="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+        <div class="row w-50">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <button id="modo-btn" class="btn btn-secondary float-end"><i class="fa-solid fa-moon"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="card-title text-center">Lista de Tarefas</h4>
+                                <h6 class="text-secondary text-center">O que temos para hoje?</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div id="alert"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <form id="todo-form">
+                                    <div class="input-group mb-3">
+                                        <input name="tarefa" type="text" id="tarefa" class="form-control" placeholder="Escreva sua tarefa" required />
+                                        <button name="submit" type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 w-50">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Minhas Tarefas</h6>
+                        <ul id="tarefas" class="list-group"><small class="vazia">Nenhuma Tarefa registrada ainda...</small></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/common.js"></script>
+    <script>
+      document.querySelector('button[name="submit"]').addEventListener('click', function() {
+        let inputTarefa = document.getElementById("tarefa");
+        let tarefa = inputTarefa.value.trim();
+
+        if (tarefa !== "") {
+          if (!tarefaExiste(tarefa)) {
+            adicionarTarefa(tarefa);
+            inputTarefa.value = "";
+          } else {
+            bsAlert('Esta tarefa já foi cadastrada. Tente uma nova!', 'danger');
+          }
+        } else {
+          bsAlert('Por favor, insira uma tarefa válida.', 'danger');
+        }
+      });
+
+      document.getElementById("tarefas").addEventListener('click', function(event) {
+        if (event.target.tagName === 'BUTTON' || event.target.closest('button')) {
+          let button = event.target.tagName === 'BUTTON' ? event.target : event.target.closest('button');
+          let linha = event.target.closest('li');
+
+          if (button.name === 'deletar') {
+            linha.remove();
+            if (document.getElementById('tarefas').querySelectorAll('li').length === 0) {
+              document.getElementById('tarefas').innerHTML = '<small class="vazia">Nenhuma Tarefa registrada ainda...</small>';
+            }
+          } else if (button.name === 'concluir') {
+            // verifica se existe a classe text-decoration-line-through
+            if (linha.querySelector('.texto-tarefa').classList.contains('text-decoration-line-through')) {
+              linha.querySelector('.texto-tarefa').classList.remove('text-decoration-line-through');
+            } else {
+              linha.querySelector('.texto-tarefa').classList.add('text-decoration-line-through', 'text-success');
+            }
+          }
+        }
+      });
+
+      function tarefaExiste(novaTarefa) {
+        const tarefas = document.querySelectorAll('.texto-tarefa');
+        for (let i = 0; i < tarefas.length; i++) {
+          if (tarefas[i].textContent === novaTarefa) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function adicionarTarefa(tarefa) {
+        const tarefas = document.getElementById("tarefas");
+        const li = document.createElement("li");
+
+        li.className = "list-group-item d-flex justify-content-between align-items-center ";
+        li.innerHTML = `
+            <span class="texto-tarefa">${tarefa}</span>
+            <div class="btn-group">
+              <button name="deletar" class="btn btn-danger btn-sm btn-deletar"><i class="fa-solid fa-trash-can"></i></button>
+              <button name="concluir" class="btn btn-primary btn-sm edit-btn"><i class="fa-solid fa-check"></i></button>
+            </div>
+        `;
+
+        if (tarefas.querySelector('.vazia'))
+          tarefas.querySelector('.vazia').remove();
+
+        if (document.getElementById('bsAlert'))
+          document.getElementById('bsAlert').remove();
+
+        tarefas.appendChild(li);
+      }
+
+      document.getElementById("modo-btn").addEventListener('click', function() {
+        const body = document.body;
+        const modoEscuro = body.classList.contains('dark-mode');
+
+        if (modoEscuro) {
+          body.classList.remove('dark-mode');
+          body.classList.add('light-mode');
+          document.getElementById("modo-btn").innerHTML = '<i class="fa-solid fa-moon"></i>';
+        } else {
+          body.classList.remove('light-mode');
+          body.classList.add('dark-mode');
+          document.getElementById("modo-btn").innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
+      });
+    </script>
 </body>
 </html>

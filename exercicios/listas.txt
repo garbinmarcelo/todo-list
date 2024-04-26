@@ -1,67 +1,14 @@
-Primeira lista de exercicios:
-
-Comparação de três números:
-Escreva um programa que solicite ao usuário três números e determine o maior entre eles.
-Exiba o número maior.
-
-Verificação de triângulo:
-
-Escreva um programa que solicite ao usuário três valores representando os lados de um triângulo e determine se esses valores podem formar um triângulo válido.
-Se sim, classifique o triângulo como equilátero, isósceles ou escaleno, dependendo da igualdade dos lados. A primeira etapa é entender as condições necessárias para que três valores possam formar um triângulo válido. De acordo com a desigualdade triangular, a soma de dois lados quaisquer de um triângulo deve ser sempre maior que o terceiro lado. Ou seja, se a, b e c são os lados do triângulo, então:
-a + b > c
-b + c > a
-a + c > b
-
-Após verificar se os valores formam um triângulo válido, podemos determinar o tipo de triângulo com base no comprimento dos lados:
-Triângulo equilátero: Todos os três lados são iguais.
-Triângulo isósceles: Dois lados são iguais.
-Triângulo escaleno: Todos os três lados são diferentes.
-
------------------------------------------------------------------------------
-
-Segunda lista de exercicios:
-
-1 Bom dia, Mundo!
-  ◦ Escreva uma função em JavaScript que mostre na tela a mensagem “Bom dia, Mundo!!!”.
-  2 Cálculo do Cubo
-  ◦ Crie uma função que retorne o cubo de um número fornecido pelo usuário.
-  3 Conversão de Temperatura
-  ◦ Implemente uma função que converta uma temperatura fornecida em graus Fahrenheit (F) para Celsius (C). Dica: subtraia 32 da temperatura e multiplique o resultado por 0,5556 (ou 5/9).
-  4 Área de um Triângulo
-  ◦ Escreva uma função que calcule e retorne a área de um triângulo com base nos valores de base e altura fornecidos.
-  5 Área e Perímetro de um Círculo
-  ◦ Crie uma função que encontre a área e o perímetro de um círculo, com base no raio fornecido.
-  6 Número Invertido
-  ◦ Implemente uma função que mostre na tela um número fornecido pelo usuário, mas invertido. Por exemplo, se o usuário fornecer o número 875, a função deve exibir 578.
-  7 Contagem de Vogais
-  ◦ Escreva uma função que conte o número de vogais em uma string fornecida pelo usuário. Ignore vogais acentuadas.
-  8 Retorno de Investimento
-  ◦ Crie uma função que informe o retorno de um investimento (montante) com base nos valores do capital inicial, tempo em meses e taxa de juros mensal fornecidos pelo usuário. Use a fórmula: (M = C \cdot (1 + i)^t), onde:
-  ▪ (C) é o capital inicial investido.
-  ▪ (i) é a taxa de juros (em percentual).
-  ▪ (t) é o tempo do investimento (em meses). Exiba o resultado com duas casas decimais.
-  9 Fatorial
-  ◦ Implemente uma função que calcule e retorne o fatorial de um número inteiro fornecido pelo usuário.
-  10  Contagem de Caractere
-  ◦ Crie uma função que conte quantas vezes um caractere específico aparece em uma string. Tanto o caractere quanto a string devem ser fornecidos pelo usuário.
-  11  Verificação de Número Primo
-  ◦ Escreva uma função que verifique se um número fornecido pelo usuário é primo ou não.
-
----------------------------------------------------------------------------------------------------
-
-Terceira lista de exercicios:
-
-1. Crie um modelo (Model) simples:
-Crie uma classe JavaScript que represente um modelo de dados básico, como um objeto de usuário com propriedades como nome, email e idade.
 
 2. Crie um controlador (Controller) para o modelo:
 Desenvolva um controlador que manipule a lógica de negócios para interagir com o modelo. Por exemplo, você pode criar métodos para adicionar um novo usuário, atualizar informações existentes ou excluir usuários.
 
 3. Implemente a visualização (View):
-Crie uma página HTML simples com campos de entrada para inserir dados de usuário e botões para interagir com o controlador. Use JavaScript para vincular esses elementos à lógica do controlador.
+Crie uma página HTML simples com campos de entrada para inserir dados de usuário e botões para interagir com o controlador.
+Use JavaScript para vincular esses elementos à lógica do controlador.
 
 4. Utilize o padrão Factory:
-Implemente uma fábrica simples que cria instâncias do modelo com base em diferentes tipos de usuários. Por exemplo, um usuário padrão, um usuário premium, etc. Isso pode ser útil para entender como o padrão Factory pode ajudar na criação de objetos complexos.
+Implemente uma fábrica simples que cria instâncias do modelo com base em diferentes tipos de usuários. Por exemplo, um usuário padrão, um usuário premium, etc.
+Isso pode ser útil para entender como o padrão Factory pode ajudar na criação de objetos complexos.
 
 5. Teste a interação entre as camadas:
 Certifique-se de testar a interação entre o modelo, controlador e visualização. Verifique se os dados são passados corretamente entre essas camadas e se as operações CRUD (criar, ler, atualizar, excluir) funcionam conforme o esperado.
