@@ -15,3 +15,8 @@ __Deverá conter obrigatoriamente__
 __Requisitos para rodar a aplicação__
 + Node
 + NPM ou Yarn
+
+
+__Demo__
+- [Todo-list](https://garbin.dev/todo-list/)
+- [Exercícios](https://garbin.dev/todo-list/exercicios/lista1/01.html)
